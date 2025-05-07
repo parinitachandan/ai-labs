@@ -5,8 +5,8 @@ A fully automated Streamlit application where AI agents play Tic Tac Toe against
 ## Overview
 
 This project showcases multi-agent collaboration within a controlled game environment. Three AI agents, each powered by a different model, engage in an autonomous match of Tic Tac Toe:
-- **Player X** — *Gemini 1.5 Flash*
-- **Player O** — *Claude 3.5 Sonnet*
+- **Player X** — *Gemini 2.0 Flash*
+- **Player O** — *Claude 3.7 Sonnet*
 - **Referee** — *GPT-4o*, ensuring fair play and deciding the outcome
 
 ## Key Features

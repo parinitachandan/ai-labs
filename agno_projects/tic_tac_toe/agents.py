@@ -2,8 +2,8 @@
 AI Agents for Tic Tac Toe
 
 This module defines the AI agents used in the Tic Tac Toe game:
-- Player X: Gemini 1.5 Flash agent that plays as X
-- Player O: Claude 3.5 Sonnet agent that plays as O
+- Player X: Gemini 3.0 Flash agent that plays as X
+- Player O: Claude 3.7 Sonnet agent that plays as O
 - Referee: GPT-4o agent that validates moves and determines game outcomes
 
 Each agent is configured with:
