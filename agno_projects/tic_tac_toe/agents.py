@@ -56,7 +56,7 @@ def get_players():
                     - Do not include any extra text—respond with the two numbers only.
                    """),
                      model=Gemini(
-                         id="gemini-1.5-flash"
+                         id="gemini-2.0-flash"
                      ),
                      retries=3,
                      delay_between_retries=30
@@ -94,7 +94,7 @@ def get_players():
                     - Do not include any extra text—respond with the two numbers only.
                    """),
                      model=Claude(
-                         id="claude-3-5-sonnet-20241022"
+                         id="claude-3-7-sonnet-20250219"
                      ),
                      retries=3,
                      delay_between_retries=30

@@ -223,8 +223,8 @@ def main():
     # GAME SETUP: Show start screen or handle game restart
     if not st.session_state.game_started:
         st.info("This game is played between two AI agents, with a third agent acting as the referee:"
-                "\n1. Player X – Gemini 1.5 Flash"
-                "\n2. Player O – Claude 3.5 Sonnet"
+                "\n1. Player X – Gemini 2.0 Flash"
+                "\n2. Player O – Claude 3.7 Sonnet"
                 "\n3. Referee – GPT-4o"
                 "\n\nClick 'Start Game' to start the game.👇")
         if st.button("Start Game"):
