@@ -2,7 +2,6 @@
 
 Predicting house prices using **Linear Regression** with Python and scikit-learn. This project demonstrates **supervised learning, data preprocessing, feature engineering, and model evaluation** in a simple yet powerful workflow.
 
----
 
 ## Project Overview
 
@@ -16,7 +15,6 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
   - Model training and evaluation  
   - Visualization of predictions and residuals  
 
----
 
 ## Workflow
 
@@ -47,7 +45,6 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
    - Visualizations for understanding model performance.  
    - Sample of original and scaled prices for clarity.
 
----
 
 ## Key Metrics
 
@@ -57,6 +54,7 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
 | R² Score | 0.5716 | Proportion of variance explained by the model. Closer to 1 = better fit. |
 
 > Note: MSE is calculated on **log-transformed prices**, making it easier to interpret and compare errors.
+
 
 ## Visualizations
 
@@ -85,8 +83,6 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
     * **White/Gray** (closer to 0.00) means **no strong relationship**.
 * **Axes:** All the features are listed on both sides. Look at the last row (`price_scaled`) to quickly see which features most impact the house price.
 
----
-
 ### Predicted vs Actual
 ![Predicted vs Actual](./visualizations/predicted_vs_actual.png)
 **Purpose:** This checks how well the model's predictions match the real prices in the test data.
@@ -95,7 +91,6 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
 * **Y-axis (Predicted):** The price the model guessed (after log-transforming).
 * **Red Dashed Line:** This is the **perfect prediction line**.
 * **Blue Dots:** Each dot is a house. The closer a dot is to the red line, the more accurate the prediction was. The cluster of points close to the line shows the model performs reasonably well, especially for the higher-priced homes.
----
 
 ### Residual Distribution
 ![Residuals](./visualizations/residual_distribution.png)
@@ -104,11 +99,9 @@ Predicting house prices using **Linear Regression** with Python and scikit-learn
 * **X-axis:** The size of the **error** (residual). An error of **0** is a perfect prediction.
 * **Y-axis (Count):** The frequency of each error size.
 * The plot shows errors are mostly **centered near zero**, which is good. However, there's a small group of very large **negative errors** (far left). A negative error means the **model guessed too high** (overestimated the price) for a few houses. This suggests the model might be struggling with a few extreme, low-priced houses.
----
 
 ## Contact
 
 If you’d like to connect or discuss this project:
 - **LinkedIn:** [Parinita Chandan](https://www.linkedin.com/in/parinitachandan/)
 - **GitHub:** [github.com/parinitachandan](https://github.com/parinitachandan)
----
