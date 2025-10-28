@@ -3,7 +3,6 @@
 Predicting heart disease using **Logistic Regression** with Python and scikit-learn.  
 This project demonstrates **supervised learning, data preprocessing, model evaluation, and visualization**.
 
----
 
 ## Project Overview
 
@@ -18,7 +17,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
   - Performing 5-Fold Cross-Validation
   - Visualizing predictions, residuals, and feature importance  
 
----
 
 ## Workflow
 
@@ -45,7 +43,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
    - **Classification report:** Precision, recall, and F1-score for each class.  
    - **Visualizations:** Confusion matrix, predicted vs actual scatter plot, and feature importance.
 
----
 
 ## Key Metrics
 
@@ -59,7 +56,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 
 > Metrics may vary slightly depending on train-test split and random state.
 
----
 
 ## Visualizations
 
@@ -71,8 +67,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 * **Y-axis (count):** Shows the raw count of patients for each class. The height of the bars shows the frequency of each outcome.
 * The plot confirms the dataset is relatively **balanced**, with a slightly higher count of patients having heart disease (Class 1, count $\approx 500$) than those without (Class 0, count $\approx 410$).
 
----
-
 ### Correlation Heatmap
 ![Correlation Heatmap](./visualizations/correlation_heatmap.png)
 **Purpose:** This shows how strongly every pair of features in the data is related to each other.
@@ -83,8 +77,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 * **Axes:** All preprocessed features and the target (`HeartDisease`) are listed on both sides.
 * By looking at the `HeartDisease` row/column, features like **`ST_Slope_Flat` (0.55)**, **`ExerciseAngina_Y` (0.49)**, and **`Oldpeak` (0.43)** show a strong positive relationship with heart disease. Conversely, **`MaxHR` (-0.40)** shows a moderate negative relationship.
 
----
-
 ### Predicted vs Actual
 ![Predicted vs Actual](./visualizations/predicted_vs_actual.png)
 **Purpose:** To visually compare the Logistic Regression model's binary predictions (0 or 1) against the true actual values for each sample in the test set.
@@ -94,8 +86,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 * **Blue Circles (Actual):** These are the true class labels for the patients.
 * **Red 'x' Marks (Predicted):** These are the class labels the model guessed.
 * **Interpretation:** Points where the red 'x' and blue circle overlap indicate a **correct classification** (True Positive or True Negative). Misalignment indicates an **incorrect classification**. The high degree of overlap demonstrates the model's high accuracy (Accuracy: 0.8696) on the test set.
-
----
 
 ### Confusion Matrix
 ![Confusion Matrix](./visualizations/confusion_matrix.png)
@@ -109,8 +99,6 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 * **Bottom-Right (48):** This is the count of **True Positives (TP)**, where the model correctly predicted **48** patients **have** heart disease.
 * The model shows an equal number of False Positives and False Negatives (6 of each) on this test set.
 
----
-
 ### Feature Importance
 ![Feature Importance](./visualizations/feature_importance.png)
 **Purpose:** To show which features are most important in predicting heart disease and whether they increase or decrease the risk.
@@ -122,11 +110,9 @@ This project demonstrates **supervised learning, data preprocessing, model evalu
 * **Negative coefficients (left side):** Features which decreases the chance of heart disease.  
   * Example: **`ChestPainType_ATA`** – having atypical angina lowers risk.
 * **Bar Size:** The length of the bar represents the absolute magnitude (strength) of the coefficient. A longer bar indicates a feature has a larger impact (positive or negative) on the heart disease prediction. A shorter bar indicates a feature has a smaller impact.
----
 
 ## Contact
 
 If you’d like to connect or discuss this project:
 - **LinkedIn:** [Parinita Chandan](https://www.linkedin.com/in/parinitachandan/)
 - **GitHub:** [github.com/parinitachandan](https://github.com/parinitachandan)
----
