@@ -2,11 +2,12 @@ import kagglehub
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
 from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, log_loss
 import os
+
 
 # --- Configuration --- #
 DATASET_PATH = "fedesoriano/heart-failure-prediction"
@@ -32,17 +33,15 @@ def load_data(dataset_path: str, data_file: str) -> pd.DataFrame:
 def explore_data(data: pd.DataFrame):
     print("\nData Exploration:")
     print(f"Data size: {data.shape}")
-    print(data.head())
+    print("First 5 rows:\n", data.head())
     print("Columns:", data.columns.tolist())
 
 
 def preprocess_data(data: pd.DataFrame) -> pd.DataFrame:
-    print("\nEncoding categorical columns...")
-    encoder = LabelEncoder()
+    print("\nEncoding categorical columns using one-hot encoding...")
     categorical_cols = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
-    for col in categorical_cols:
-        if col in data.columns:
-            data[col] = encoder.fit_transform(data[col])
+    data = pd.get_dummies(data, columns=categorical_cols, drop_first=True)
+    print(f"Columns after encoding: {data.columns.tolist()}")
     return data
 
 
@@ -70,12 +69,30 @@ def train_model(X_train, Y_train):
     return model
 
 
+def cross_validate_model(model, X, Y, folds=5):
+    """Perform cross-validation and print metrics."""
+    skf = StratifiedKFold(n_splits=folds, shuffle=True, random_state=RANDOM_STATE)
+
+    print(f"\nPerforming {folds}-Fold Cross-Validation (Accuracy and Log Loss)...")
+
+    accuracy_scores = cross_val_score(model, X, Y, cv=skf, scoring='accuracy')
+    print(f"{folds}-Fold CV Accuracy: {accuracy_scores.mean():.4f}")
+    print(f"Standard Deviation of Accuracy scores: {accuracy_scores.std():.4f}")
+
+    logloss_scores = cross_val_score(model, X, Y, cv=skf, scoring='neg_log_loss')
+    print(f"{folds}-Fold CV Log Loss: {-logloss_scores.mean():.4f}")
+    print(f"Standard Deviation of Log Loss scores: {logloss_scores.std():.4f}")
+
+
 def evaluate_model(model, X_test, Y_test, X_columns):
     Y_pred = model.predict(X_test)
+    Y_pred_proba = model.predict_proba(X_test)  # Probabilities needed for log loss
 
     # Metrics
     accuracy = accuracy_score(Y_test, Y_pred)
+    loss = log_loss(Y_test, Y_pred_proba)  # Log Loss
     print(f"\nAccuracy: {accuracy:.4f}")
+    print(f"Log Loss: {loss:.4f}")
     print("\nClassification Report:\n", classification_report(Y_test, Y_pred))
 
     # Confusion matrix
@@ -130,21 +147,26 @@ def main():
     X = data.drop('HeartDisease', axis=1)
     Y = data['HeartDisease']
 
-    # Train/Test split
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
-
-    # Scaling
+    # --- Scaling --- #
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
+    X_scaled = scaler.fit_transform(X)
 
-    # Train
-    model = train_model(X_train_scaled, Y_train)
+    # --- Cross-Validation --- #
+    model_cv = LogisticRegression(max_iter=MAX_ITER, random_state=RANDOM_STATE)
+    cross_validate_model(model_cv, X_scaled, Y, folds=5)
 
-    # Evaluate
-    evaluate_model(model, X_test_scaled, Y_test, X.columns)
+    # --- Train/Test Split for final evaluation --- #
+    X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
-    print("✅ Project complete. Check visualizations folder for outputs.")
+    print("\nTraining Final Model...")
+
+    # --- Train final model --- #
+    final_model = train_model(X_train, Y_train)
+
+    # --- Evaluate final model --- #
+    evaluate_model(final_model, X_test, Y_test, X.columns)
+
+    print("\n✅ Project complete. Check visualizations folder for outputs.")
 
 
 if __name__ == "__main__":
